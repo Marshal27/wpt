@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<title>Helper IFrame</title>
+<script>
+'use strict';
+
+async function onLoad() {
+  self.addEventListener('message', evt => {
+    if (self.opener)
+      self.opener.postMessage(evt.data, '*');
+    else
+      self.top.postMessage(evt.data, '*');
+  }, { once: true });
+
+  const params = new URLSearchParams(self.location.search);
+  const frame = document.createElement('iframe');
+  frame.src = params.get('target');
+  document.body.appendChild(frame);
+
+  frame.addEventListener('load', function(){
+    frame.contentWindow.postMessage({op: 'request',
+        name: 'testLock', ifAvailable: true}, '*');
+  });
+}
+self.addEventListener('load', onLoad);
+</script>
