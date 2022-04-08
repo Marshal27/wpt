@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script src="/common/dispatcher/dispatcher.js"></script>
+<script src="/common/utils.js"></script>
+<script src="resources/utils.sub.js"></script>
+
+<script>
+  function is_url_prefetched(url) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url, false);
+    xhttp.send(null);
+    return xhttp.status == 200 && xhttp.responseText == 1;
+  }
+
+  promise_test(async t => {
+    assert_implements(HTMLScriptElement.supports('speculationrules'), "Speculation Rules not supported");
+
+    let urls = getPrefetchUrlList(5);
+    insertSpeculationRules({ prefetch: [{ source: 'list', urls: urls }] });
+    await new Promise(resolve => t.step_timeout(resolve, 3000));
+
+    let prefetched_cnt = urls.reduce(
+      (acc, url) => acc + (is_url_prefetched(url) ? 1 : 0), 0);
+    assert_greater_than_equal(prefetched_cnt, 2, "At least two urls should be prefetched to pass the test.");
+  }, "browser should be able to prefetch multiple urls");
+</script>
