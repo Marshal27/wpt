@@ -28,6 +28,12 @@
 
   const green = "rgb(0, 128, 0)";
 
-  test(() => assert_equals(getComputedStyle(vw.firstChild).color, green), "Match width with vw");
-  test(() => assert_equals(getComputedStyle(vh.firstChild).color, green), "Match width with vh");
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(getComputedStyle(vw.firstChild).color, green);
+  }, "Match width with vw");
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(getComputedStyle(vh.firstChild).color, green);
+  }, "Match width with vh");
 </script>

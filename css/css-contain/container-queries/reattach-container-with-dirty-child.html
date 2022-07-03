@@ -21,16 +21,18 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     container.offsetTop;
     assert_equals(getComputedStyle(child).color, "rgb(255, 0, 0)");
   }, "Initially wider than 200px");
 
-  test(() => {
+  promise_test(async () => {
     container.style.width = "100px";
     container.style.display = "inline-block";
     inner.style.color = "green";
     container.offsetTop;
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, "rgb(0, 255, 0)");
     assert_equals(getComputedStyle(inner).color, "rgb(0, 128, 0)");
   }, "Container query changed and inner.style applied");

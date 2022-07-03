@@ -39,32 +39,38 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(function(t) {
+  promise_test(async t => {
     t.add_cleanup(() => {
       for (let e of [outer, intermediate, inner])
         e.classList.remove('container');
     });
 
     // No container.
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 0, 0)');
 
     outer.classList.add('container');
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 128, 0)');
 
     // The container query does not match widths in the range [201, 299],
     // and #intermediate has width:250px.
     intermediate.classList.add('container');
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 0, 0)');
 
     inner.classList.add('container');
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 128, 0)');
 
     // Should have no effect, #inner is the container.
     outer.classList.remove('container');
     intermediate.classList.remove('container');
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 128, 0)');
 
     inner.classList.remove('container');
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 0, 0)');
   }, 'Changing the container type invalidates relevant descendants');
 </script>

@@ -39,30 +39,39 @@
   const green = "rgb(0, 128, 0)";
   const lime = "rgb(0, 255, 0)";
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target, "::before").color, green);
   }, "Originating element container for ::before");
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target, "::after").color, green);
   }, "Originating element container for ::after");
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target, "::marker").color, green);
   }, "Originating element container for ::marker");
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target, "::first-line").color, green);
   }, "Originating element container for ::first-line");
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target, "::first-letter").color, green);
   }, "Originating element container for ::first-letter");
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(outer, "::first-line").color, green);
   }, "Originating element container for outer ::first-line");
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(outer, "::first-letter").color, green);
   }, "Originating element container for outer ::first-letter");
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(dialog, "::backdrop").backgroundColor, lime, "::backdrop not rendered");
     dialog.showModal();
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(dialog, "::backdrop").backgroundColor, green, "::backdrop rendered");
   }, "Originating element container for ::backdrop");
 </script>

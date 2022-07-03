@@ -30,7 +30,8 @@
     }
   });
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     let expected_width = 200;
     for (let container of document.querySelectorAll(".container"))
       assert_equals(container.offsetWidth, expected_width--);

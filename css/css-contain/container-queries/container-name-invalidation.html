@@ -40,35 +40,42 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(function(t) {
+  promise_test(async t => {
     t.add_cleanup(() => { outer.style = ''; });
 
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 0, 0)');
 
     outer.style.width = '250px';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 128, 0)');
 
     outer.style.width = '251px';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 0, 0)');
   }, 'Changing a named container invalidates relevant descendants');
 
-  test(function(t) {
+  promise_test(async t => {
     t.add_cleanup(() => {
       outer.style = '';
       intermediate.style = '';
     });
 
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 0, 0)');
 
     // #intermediate becomes the new container.
     intermediate.style = 'container-name:c1; container-type:inline-size';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 128, 0)');
 
     // #outer becomes the container again.
     intermediate.style = '';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 0, 0)');
 
     outer.style.width = '250px';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 128, 0)');
   }, 'Changing container-name invalidates relevant descendants');
 </script>

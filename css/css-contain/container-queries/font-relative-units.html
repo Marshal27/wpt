@@ -48,8 +48,20 @@
   setup(() => assert_implements_container_queries());
 
   const green = "rgb(0, 128, 0)";
-  test(() => assert_equals(getComputedStyle(em_test).color, green), "em relative inline-size");
-  test(() => assert_equals(getComputedStyle(rem_test).color, green), "rem relative inline-size");
-  test(() => assert_equals(getComputedStyle(ex_test).color, green), "ex relative inline-size");
-  test(() => assert_equals(getComputedStyle(ch_test).color, green), "ch relative inline-size");
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(getComputedStyle(em_test).color, green);
+  }, "em relative inline-size");
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(getComputedStyle(rem_test).color, green);
+  }, "rem relative inline-size");
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(getComputedStyle(ex_test).color, green);
+  }, "ex relative inline-size");
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(getComputedStyle(ch_test).color, green);
+  }, "ch relative inline-size");
 </script>

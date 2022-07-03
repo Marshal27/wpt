@@ -50,13 +50,15 @@
     polyfill_declarative_shadow_dom(document);
   });
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     let cs = getComputedStyle(direct);
     assert_equals(cs.width, '100px');
     assert_equals(cs.height, '100px');
   }, 'Direct slotted child queries shadow-including ancestors');
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     let cs = getComputedStyle(nondirect);
     assert_equals(cs.width, '10px'); // #direct
     assert_equals(cs.height, '20px'); // #outer

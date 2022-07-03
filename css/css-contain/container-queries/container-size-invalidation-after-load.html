@@ -34,6 +34,7 @@
     container.style.width = '400px';
     container.style.setProperty('--x', 'x'); // crbug.com/1321010
 
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 128, 0)');
   });
 </script>

@@ -63,7 +63,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target1);
       assert_equals(s.getPropertyValue('--x'), '30');
     }, 'getComputedStyle when element is display:none');
@@ -78,7 +79,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target2);
       assert_equals(s.getPropertyValue('--x'), '30');
     }, 'getComputedStyle when parent is display:none');
@@ -93,7 +95,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target3);
       assert_equals(s.getPropertyValue('--x'), '30');
     }, 'getComputedStyle when ancestor is display:none');
@@ -108,7 +111,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target4);
       assert_equals(s.getPropertyValue('--x'), '');
     }, 'getComputedStyle when container is display:none');
@@ -129,7 +133,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target5);
       assert_equals(s.getPropertyValue('--x'), '30');
     }, 'getComputedStyle when element in nested container is display:none');
@@ -150,7 +155,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target6);
       assert_equals(s.getPropertyValue('--x'), '');
     }, 'getComputedStyle when inner container is display:none');
@@ -171,7 +177,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target7);
       assert_equals(s.getPropertyValue('--x'), '');
     }, 'getComputedStyle when intermediate ancestor is display:none');
@@ -192,7 +199,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target8);
       assert_equals(s.getPropertyValue('--x'), '');
     }, 'getComputedStyle when outer container is display:none');
@@ -207,10 +215,12 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target9);
       assert_equals(s.getPropertyValue('--x'), '30');
       target9.classList.add('none');
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(s.getPropertyValue('--x'), '30');
     }, 'getComputedStyle when element becomes display:none');
   </script>
@@ -224,10 +234,12 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target10);
       assert_equals(s.getPropertyValue('--x'), '30');
       parent10.classList.add('none');
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(s.getPropertyValue('--x'), '30');
     }, 'getComputedStyle when parent becomes display:none');
   </script>
@@ -241,10 +253,12 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target11);
       assert_equals(s.getPropertyValue('--x'), '30');
       ancestor11.classList.add('none');
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(s.getPropertyValue('--x'), '30');
     }, 'getComputedStyle when ancestor becomes display:none');
   </script>
@@ -258,10 +272,12 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target12);
       assert_equals(s.getPropertyValue('--x'), '30');
       container12.classList.add('none');
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(s.getPropertyValue('--x'), '');
     }, 'getComputedStyle when container becomes display:none');
   </script>
@@ -281,10 +297,12 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target13);
       assert_equals(s.getPropertyValue('--x'), '30');
       container13.classList.add('none');
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(s.getPropertyValue('--x'), '');
     }, 'getComputedStyle when intermediate container becomes display:none');
   </script>
@@ -298,7 +316,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target14, '::before');
       assert_equals(s.getPropertyValue('content'), '"foo"');
       assert_equals(s.getPropertyValue('--x'), '30');
@@ -314,7 +333,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target15, '::before');
       assert_equals(s.getPropertyValue('content'), '"foo"');
       assert_equals(s.getPropertyValue('--x'), '30');
@@ -330,7 +350,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target16, '::before');
       assert_equals(s.getPropertyValue('content'), '"foo"');
       assert_equals(s.getPropertyValue('--x'), '30');
@@ -346,7 +367,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target17, '::before');
       assert_equals(s.getPropertyValue('content'), '"foo"');
       assert_equals(s.getPropertyValue('--x'), '');
@@ -364,13 +386,15 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       target18.offsetTop;
       let s = getComputedStyle(target18);
       assert_equals(s.getPropertyValue('--x'), '');
 
       outer18.classList.remove('small');
       outer18.classList.add('big');
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(s.getPropertyValue('--x'), '50');
     }, 'getComputedStyle when in display:none with layout dirty outer element');
   </script>

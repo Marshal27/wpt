@@ -18,11 +18,13 @@
 
   let content = document.getElementById("content");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(content).color, "rgb(0, 128, 0)");
 
     // Dirty style of an element inside the container:
     content.style.backgroundColor = "lime";
+    if (waitForPolyfill) await waitForPolyfill();
 
     // The container query should still evaluate correctly:
     assert_equals(getComputedStyle(content).color, 'rgb(0, 128, 0)');

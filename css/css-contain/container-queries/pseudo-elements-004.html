@@ -37,15 +37,14 @@
   const pseudo_elements = ["::before", "::after", "::marker", "::first-line", "::first-letter", "::backdrop"];
 
   pseudo_elements.forEach((pseudo_element) => {
-    test(() => {
+    promise_test(async () => {
+      outer.style.width = "200px";
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(getComputedStyle(target, pseudo_element).color, red);
     }, `Initial color for ${pseudo_element}`);
-  });
 
-  outer.style.width = "300px";
-
-  pseudo_elements.forEach((pseudo_element) => {
-    test(() => {
+    promise_test(async () => {
+      outer.style.width = "300px";
       assert_equals(getComputedStyle(target, pseudo_element).color, green);
     }, `Color for ${pseudo_element} depending on container`);
   });

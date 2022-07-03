@@ -31,15 +31,18 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(ref).color, "rgb(0, 128, 0)");
   }, "Check that container queries is supported");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(inner_none.firstChild).color, "rgb(0, 0, 0)");
   }, "(min-width: 0) does not match a container without a principal box (display:none)");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(inner_contents.firstChild).color, "rgb(0, 0, 0)");
   }, "(min-width: 0) does not match a container without a principal box (display:contents)");
 </script>

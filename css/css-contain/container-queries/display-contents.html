@@ -47,7 +47,8 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target1);
       assert_equals(s.getPropertyValue('--x'), '');
     }, 'getComputedStyle when container is display:contents');
@@ -60,12 +61,15 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target2);
       assert_equals(s.getPropertyValue('--x'), '30');
       container2.classList.add('contents');
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(s.getPropertyValue('--x'), '');
       container2.classList.remove('contents');
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(s.getPropertyValue('--x'), '30');
     }, 'getComputedStyle when container becomes display:contents');
   </script>
@@ -81,12 +85,15 @@
     </div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let s = getComputedStyle(target3);
       assert_equals(s.getPropertyValue('--x'), '30');
       container3.classList.add('contents');
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(s.getPropertyValue('--x'), '');
       container3.classList.remove('contents');
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(s.getPropertyValue('--x'), '30');
     }, 'getComputedStyle when intermediate container becomes display:contents');
   </script>

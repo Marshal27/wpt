@@ -21,7 +21,7 @@ const doc = iframe.contentDocument;
 const win = iframe.contentWindow;
 
 function test_media_query(feature, result, description) {
-  test((t) => {
+  promise_test(async t => {
     t.add_cleanup(() => { doc.body.innerHTML = ''; })
     doc.body.innerHTML = `
       <style>
@@ -35,6 +35,7 @@ function test_media_query(feature, result, description) {
         }
       </style>
       `;
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(win.getComputedStyle(doc.body).color, result);
   }, description);
 }

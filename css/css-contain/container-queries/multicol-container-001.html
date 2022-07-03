@@ -23,8 +23,9 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(() => {
+  promise_test(async () => {
     const green = "rgb(0, 128, 0)";
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(document.querySelector("#first-child")).color, green);
     assert_equals(getComputedStyle(document.querySelector("#second-child")).color, green);
   }, "Children of multicol inline-size container should match inline-size of the container");

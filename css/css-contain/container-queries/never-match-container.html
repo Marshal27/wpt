@@ -34,11 +34,13 @@
 <script>
   const red = "rgb(255, 0, 0)";
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_not_equals(getComputedStyle(inner).color, red);
   }, "Size @container query against inline box never matches");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_not_equals(getComputedStyle(document.querySelector("#svg-inner")).fill, red);
   }, "Size @container query against svg element never matches");
 </script>

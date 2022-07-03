@@ -47,20 +47,39 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(() => assert_equals(padded.offsetHeight, 100),
-       "#container height measured with 500px width. Both container children visible");
-  test(() => assert_equals(container.offsetWidth, 400),
-       "#container width 400px after padding is applied.");
-  test(() => assert_equals(container.offsetHeight, 50),
-       "#container width 400px after padding is applied. #second is removed from the rendering");
+  const firstWidth = "500px";
+  const secondWidth = "399px";
+
+  promise_test(async () => {
+    vertical.style.width = firstWidth;
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(padded.offsetHeight, 100);
+  }, "#container height measured with 500px width. Both container children visible");
+  promise_test(async () => {
+    vertical.style.width = firstWidth;
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(container.offsetWidth, 400);
+  }, "#container width 400px after padding is applied.");
+  promise_test(async () => {
+    vertical.style.width = firstWidth;
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(container.offsetHeight, 50);
+  }, "#container width 400px after padding is applied. #second is removed from the rendering");
 
   // Reduce width by 1px to test that a re-layout is not stateful.
-  vertical.style.width = "399px";
-
-  test(() => assert_equals(padded.offsetHeight, 100),
-       "#container height measured with 499px width. Both container children visible");
-  test(() => assert_equals(container.offsetWidth, 399),
-       "#container width 399px after padding is applied. #second is removed from the rendering");
-  test(() => assert_equals(container.offsetHeight, 50),
-       "#container width 399x after padding is applied. #second is removed from the rendering");
+  promise_test(async () => {
+    vertical.style.width = secondWidth;
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(padded.offsetHeight, 100);
+  }, "#container height measured with 499px width. Both container children visible");
+  promise_test(async () => {
+    vertical.style.width = secondWidth;
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(container.offsetWidth, 399);
+  }, "#container width 399px after padding is applied. #second is removed from the rendering");
+  promise_test(async () => {
+    vertical.style.width = secondWidth;
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_equals(container.offsetHeight, 50);
+  }, "#container width 399x after padding is applied. #second is removed from the rendering");
 </script>

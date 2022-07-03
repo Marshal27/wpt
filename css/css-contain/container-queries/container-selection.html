@@ -114,7 +114,7 @@
   setup(() => assert_implements_container_queries());
 
   function test_query(prelude, selector, expected) {
-    test(t => {
+    promise_test(async t => {
       let elements = document.querySelectorAll(selector);
       assert_equals(elements.length, 1);
       let element = elements[0];
@@ -124,6 +124,7 @@
       style.innerText = `@container ${prelude} { span { --match:true; } } `;
       document.body.append(style);
 
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(getComputedStyle(element).getPropertyValue('--match'), expected);
     }, `${prelude} for ${selector}`);
   }

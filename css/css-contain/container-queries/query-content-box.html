@@ -62,19 +62,23 @@
 
   const green = "rgb(0, 128, 0)";
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(document.querySelector("#container1 > .target")).backgroundColor, green);
   }, "Size queries with content-box sizing");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(document.querySelector("#container2 > .target")).backgroundColor, green);
   }, "Size queries with border-box sizing");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(document.querySelector("#container3 > .target")).backgroundColor, green);
   }, "Size queries with content-box sizing and overflow:scroll");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(document.querySelector("#container4 > .target")).backgroundColor, green);
   }, "Size queries with border-box sizing and overflow:scroll");
 </script>

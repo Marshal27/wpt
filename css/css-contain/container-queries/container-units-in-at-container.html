@@ -85,7 +85,8 @@
   ];
 
   for (let unit of units) {
-    test(() => {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(getComputedStyle(child1).getPropertyValue(`--${unit}`), 'true');
     }, `${unit} unit resolves against appropriate container`);
   }
@@ -93,17 +94,19 @@
   // Ensure that the writing mode of the subject element is not relevant for
   // container-relative units in the @container prelude.
   for (let unit of units) {
-    test((t) => {
+    promise_test(async t => {
       t.add_cleanup(() => {
         child1.style = '';
       });
       child1.style.writingMode = 'vertical-rl';
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(getComputedStyle(child1).getPropertyValue(`--${unit}`), 'true');
     }, `${unit} unit resolves against appropriate container (vertical writing-mode on subject)`);
   }
 
   for (let unit of units) {
-    test(() => {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(getComputedStyle(child2).getPropertyValue(`--${unit}`), 'true');
     }, `${unit} unit resolves against appropriate container (vertical writing-mode on container)`);
   }

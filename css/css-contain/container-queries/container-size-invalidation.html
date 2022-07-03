@@ -24,16 +24,20 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(function() {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(255, 0, 0)');
     container.style.width = '300px';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, 'rgb(0, 128, 0)');
   }, 'Children respond to changes in container size');
 
-  test(function() {
+  promise_test(async () => {
     container.style = '';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(descendant).color, 'rgb(255, 0, 0)');
     container.style.width = '300px';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(descendant).color, 'rgb(0, 128, 0)');
   }, 'Descendants respond to changes in container size');
 </script>

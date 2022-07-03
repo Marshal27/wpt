@@ -26,12 +26,14 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(orthogonal.offsetWidth, container.offsetWidth);
   }, "Initial non-orthogonal width");
 
-  test(() => {
+  promise_test(async () => {
     container.style.width = "100px";
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(orthogonal.offsetWidth, 50);
     assert_not_equals(orthogonal.offsetWidth, container.offsetWidth);
   }, "Orthogonal width");

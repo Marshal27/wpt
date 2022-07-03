@@ -32,7 +32,8 @@
 
   const green = "rgb(0, 128, 0)";
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(inner).color, green);
   }, "#inner querying #container inside foreignObject");
 </script>

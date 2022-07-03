@@ -235,54 +235,64 @@
 
   const green = "rgb(0, 128, 0)";
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     const t1 = document.querySelector("#inclusive-ancestor-across-root > div").shadowRoot.querySelector("#t1");
     assert_equals(getComputedStyle(t1).color, green);
   }, "Match container in outer tree");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     const t2 = document.querySelector("#t2");
     assert_equals(getComputedStyle(t2).color, green);
   }, "Match container in same tree, not walking flat tree ancestors");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     const t3 = document.querySelector("#t3");
     assert_equals(getComputedStyle(t3).color, green);
   }, "Match container in ::slotted selector's originating element tree");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     const t4 = document.querySelector("#t4");
     assert_equals(getComputedStyle(t4).color, green);
   }, "Match container in outer tree for :host");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     const t5 = document.querySelector("#inclusive-ancestor-part > div").shadowRoot.querySelector("#t5");
     assert_equals(getComputedStyle(t5).color, green);
   }, "Match container in ::part selector's originating element tree");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     const t6 = document.querySelector("#t6");
     assert_equals(getComputedStyle(t6, "::before").color, green);
   }, "Match container for ::before in ::slotted selector's originating element tree");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     const t7 = document.querySelector("#t7");
     assert_equals(getComputedStyle(t7, "::before").color, green);
   }, "Match container in outer tree for :host::before");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     const t8 = document.querySelector("#inclusive-ancestor-part-before > div").shadowRoot.querySelector("#t8");
     assert_equals(getComputedStyle(t8, "::before").color, green);
   }, "Match container for ::before in ::part selector's originating element tree");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     const outerhost = document.querySelector("#inclusive-ancestor-inner-part > div");
     const innerhost = outerhost.shadowRoot.querySelector("div");
     const t9 = innerhost.shadowRoot.querySelector("#t9");
     assert_equals(getComputedStyle(t9).color, green);
   }, "Match container for ::part selector's originating element tree for exportparts");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     const t10 = document.querySelector("#inclusive-ancestor-slot-fallback > div").shadowRoot.querySelector("#t10");
     assert_equals(getComputedStyle(t10).color, green);
   }, "Match container for slot light tree child fallback");

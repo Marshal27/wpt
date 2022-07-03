@@ -40,6 +40,8 @@
 
   promise_test(async () => {
     await waitForLoad(window);
+    if (waitForPolyfill) await waitForPolyfill();
+
     let inner_target = iframe.contentDocument.querySelector('#target');
 
     // Since there's an inline-size container, cqw/cqi should evaluate against
@@ -56,6 +58,7 @@
     assert_equals(getComputedStyle(inner_target).marginRight, '4px'); // 10cqmin
 
     iframe.style = 'width:400px;height:80px';
+    if (waitForPolyfill) await waitForPolyfill();
 
     // Not affected by resize:
     assert_equals(getComputedStyle(inner_target).left, '7px'); // 10cqw

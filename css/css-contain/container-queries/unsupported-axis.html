@@ -29,7 +29,8 @@
   }
 </style>
 <script>
-  test(function(t) {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target).getPropertyValue('--width'), 'true');
   }, '(width > 0px)');
 </script>
@@ -41,7 +42,8 @@
   }
 </style>
 <script>
-  test(function(t) {
+  promise_test(async t => {
+    if (waitForPolyfill) await waitForPolyfill();
     // container-type:inline-size does not support queries along the block
     // axis.
     assert_equals(getComputedStyle(target).getPropertyValue('--height'), '');
@@ -55,7 +57,8 @@
   }
 </style>
 <script>
-  test(function(t) {
+  promise_test(async t => {
+    if (waitForPolyfill) await waitForPolyfill();
     // (height > 0px) requires container-type:size.
     assert_equals(getComputedStyle(target).getPropertyValue('--height-or-width'), '');
   }, '((height > 0px) or (width > 0px))');
@@ -68,7 +71,8 @@
   }
 </style>
 <script>
-  test(function(t) {
+  promise_test(async t => {
+    if (waitForPolyfill) await waitForPolyfill();
     // (height > 0px) requires container-type:size.
     assert_equals(getComputedStyle(target).getPropertyValue('--width-or-height'), '');
   }, '((width > 0px) or (height > 0px))');
@@ -80,7 +84,8 @@
   }
 </style>
 <script>
-  test(function(t) {
+  promise_test(async t => {
+    if (waitForPolyfill) await waitForPolyfill();
     // (orientation: landscape) requires container-type:size.
     assert_equals(getComputedStyle(target).getPropertyValue('--orientation-or-width'), '');
   }, '((orientation: landscape) or (width > 0px))');
@@ -93,7 +98,8 @@
   }
 </style>
 <script>
-  test(function(t) {
+  promise_test(async t => {
+    if (waitForPolyfill) await waitForPolyfill();
     // (orientation: landscape) requires container-type:size.
     assert_equals(getComputedStyle(target).getPropertyValue('--width-or-orientation'), '');
   }, '((width > 0px) or (orientation: landscape))');
@@ -106,7 +112,8 @@
   }
 </style>
 <script>
-  test(function(t) {
+  promise_test(async (t) => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target).getPropertyValue('--height-or-orientation'), '');
   }, '((height > 0px) or (orientation: landscape))');
 </script>
@@ -118,11 +125,12 @@
   }
 </style>
 <script>
-  test(function(t) {
+  promise_test(async (t) => {
     // Adding full size containment via the 'contain' property does not
     // make 'height' queryable. (Limited by container-type:inline-size).
     t.add_cleanup(() => { target.style = ''; });
     target.style.contain = 'size';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target).getPropertyValue('--height-or-orientation2'), '');
   }, '((height > 0px) or (orientation: landscape)), with contain:size');
 </script>

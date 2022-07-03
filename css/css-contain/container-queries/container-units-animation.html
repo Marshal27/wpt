@@ -47,22 +47,26 @@
   const units = ['cqw', 'cqh', 'cqi', 'cqb', 'cqmin', 'cqmax'];
 
   for (let unit of units) {
-    test(() => {
+    promise_test(async () => {
       let element = document.getElementById(`element_${unit}`)
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(getComputedStyle(element).top, '60px');
     }, `Animation using ${unit} unit`);
 
-    test(() => {
+    promise_test(async () => {
       let element = document.getElementById(`element_${unit}`)
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(getComputedStyle(element).top, '60px');
       try {
         container.style.width = '300px';
         container.style.height = '300px';
+        if (waitForPolyfill) await waitForPolyfill();
         assert_equals(getComputedStyle(element).top, '90px');
       } finally {
         container.style = '';
       }
 
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(getComputedStyle(element).top, '60px');
     }, `Animation using ${unit} unit responds to changing container size`);
   }

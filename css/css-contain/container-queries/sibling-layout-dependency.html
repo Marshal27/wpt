@@ -55,11 +55,13 @@
     <div class="sibling w10" id=sibling1></div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let cs = getComputedStyle(target1);
       assert_equals(cs.getPropertyValue('--x'), '20');
 
       sibling1.style.width = '20px';
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(cs.getPropertyValue('--x'), '10');
     }, 'Sibling style mutation');
   </script>
@@ -77,11 +79,13 @@
     <div class="sibling w10" id=sibling2></div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let cs = getComputedStyle(target2);
       assert_equals(cs.getPropertyValue('--x'), '20');
 
       sibling2.style.width = '20px';
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(cs.getPropertyValue('--x'), '10');
     }, 'Sibling style mutation, parent is affected');
   </script>
@@ -99,11 +103,13 @@
     <div class="sibling w10" id=sibling3></div>
   </div>
   <script>
-    test(function() {
+    promise_test(async () => {
+      if (waitForPolyfill) await waitForPolyfill();
       let cs = getComputedStyle(target3);
       assert_equals(cs.getPropertyValue('--x'), '20');
 
       sibling3.style.width = '20px';
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(cs.getPropertyValue('--x'), '10');
     }, 'Sibling style mutation, ancestor is affected');
   </script>
@@ -122,11 +128,13 @@
   <script>
     promise_test(async function() {
       await document.fonts.ready;
+      if (waitForPolyfill) await waitForPolyfill();
 
       let cs = getComputedStyle(target4);
       assert_equals(cs.getPropertyValue('--x'), '20');
 
       sibling4.textContent = 'XXXX';
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(cs.getPropertyValue('--x'), '10');
     }, 'Sibling text mutation');
   </script>

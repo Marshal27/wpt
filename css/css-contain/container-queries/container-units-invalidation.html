@@ -35,69 +35,84 @@
     assert_equals(getComputedStyle(element).paddingRight, expected);
   }
 
-  test(function(t) {
+  promise_test(async t => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_cqi_equals(child, '30px');
 
     try {
       inline.style.containerType = 'normal';
+      if (waitForPolyfill) await waitForPolyfill();
       assert_cqi_equals(child, '50px');
     } finally {
       inline.style = '';
     }
 
+    if (waitForPolyfill) await waitForPolyfill();
     assert_cqi_equals(child, '30px');
   }, `cqi respond when selected container changes type (inline-size -> normal)`);
 
-  test(function() {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_cqb_equals(child, '40px');
 
     try {
       size.style.containerType = 'normal';
+      if (waitForPolyfill) await waitForPolyfill();
       assert_cqb_equals(child, '60px');
     } finally {
       size.style = '';
     }
 
+    if (waitForPolyfill) await waitForPolyfill();
     assert_cqb_equals(child, '40px');
   }, `cqb respond when selected container changes type (size -> normal)`);
 
-  test(function() {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_cqb_equals(child, '40px');
 
     try {
       inline.style.containerType = 'size';
       inline.style.height = '200px';
+      if (waitForPolyfill) await waitForPolyfill();
       assert_cqb_equals(child, '20px');
     } finally {
       inline.style = '';
     }
 
+    if (waitForPolyfill) await waitForPolyfill();
     assert_cqb_equals(child, '40px');
   }, `cqb respond when intermediate container changes type (inline-size -> size)`);
 
-  test(function() {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_cqi_equals(child, '30px');
 
     try {
       inline.style.width = '50px';
+      if (waitForPolyfill) await waitForPolyfill();
       assert_cqi_equals(child, '5px');
     } finally {
       inline.style = '';
     }
 
+    if (waitForPolyfill) await waitForPolyfill();
     assert_cqi_equals(child, '30px');
   }, 'cqi respond when selected container changes inline-size');
 
-  test(function() {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_cqb_equals(child, '40px');
 
     try {
       size.style.height = '50px';
+      if (waitForPolyfill) await waitForPolyfill();
       assert_cqb_equals(child, '5px');
     } finally {
       size.style = '';
     }
 
+    if (waitForPolyfill) await waitForPolyfill();
     assert_cqb_equals(child, '40px');
   }, 'cqb respond when selected container changes block-size');
 </script>

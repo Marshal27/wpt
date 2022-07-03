@@ -52,6 +52,8 @@
 
   promise_test(async () => {
     await waitForLoad(window);
+    if (waitForPolyfill) await waitForPolyfill();
+
     let inner_target1 = iframe.contentDocument.querySelector('#target1');
     let inner_target2 = iframe.contentDocument.querySelector('#target2');
     assert_equals(getComputedStyle(inner_target1).color, 'rgb(0, 0, 255)');
@@ -62,6 +64,7 @@
     // #target1 is not affected since it evaluated against another container.
     // #target2 *is* affected, because it evaluated against the iframe size
     // which just changed.
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(inner_target1).color, 'rgb(0, 0, 255)');
     assert_equals(getComputedStyle(inner_target2).color, 'rgb(0, 128, 0)');
   }, 'Use small viewport size as fallback');

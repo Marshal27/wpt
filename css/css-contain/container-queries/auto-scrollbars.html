@@ -37,14 +37,16 @@
                                "Tests do not work with overlay scrollbars");
   });
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_less_than(scroller.clientWidth, 100, "Expects a vertical scrollbar");
     assert_equals(getComputedStyle(inner).height, "50px",
                   "Layout with a scrollbar means the container query applies");
   }, "Initial layout - expecting a scrollbar without overflowing content instead of overflowing content without a scrollbar");
 
-  test(() => {
+  promise_test(async () => {
     inner.style.borderBottomWidth = "2px";
+    if (waitForPolyfill) await waitForPolyfill();
     assert_less_than(scroller.clientWidth, 100, "Expects a vertical scrollbar");
     assert_equals(getComputedStyle(inner).height, "50px",
                   "Layout with a scrollbar means the container query applies");

@@ -30,15 +30,18 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(container).getPropertyValue('--ref'), 'PASS');
   }, 'Reference variable is applied');
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(container).getPropertyValue('container-name'), 'PASS');
   }, 'container-name is not animatable');
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(container).getPropertyValue('container-type'), 'inline-size');
   }, 'container-type is not animatable');
 

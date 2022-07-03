@@ -36,39 +36,46 @@
     rect_dynamic.removeAttribute('height');
   }
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(rect1.width.baseVal.unitType, SVGLength.SVG_LENGTHTYPE_UNKNOWN);
   }, 'unitType with container-relative units');
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(rect1.width.baseVal.value, 20);
     assert_equals(rect1.height.baseVal.value, 15);
   }, 'cqw,cqh can be resolved');
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(rect2.width.baseVal.value, 20);
     assert_equals(rect2.height.baseVal.value, 15);
   }, 'cqi,cqb can be resolved');
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(rect3.width.baseVal.value, 15);
     assert_equals(rect3.height.baseVal.value, 20);
   }, 'cqmin,cqmax can be resolved');
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(rect4.width.baseVal.value, 35);
     assert_equals(rect4.height.baseVal.value, 23);
   }, 'calc() with container-relative units can be resolved');
 
-  test((t) => {
+  promise_test(async t => {
     t.add_cleanup(cleanup);
     rect_dynamic.setAttribute('width', '20cqw');
     rect_dynamic.setAttribute('height', '20cqh');
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(rect_dynamic.width.baseVal.value, 40);
     assert_equals(rect_dynamic.height.baseVal.value, 30);
 
     rect_dynamic.width.baseVal.value = 80;
     rect_dynamic.height.baseVal.value = 45;
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(rect_dynamic.getAttribute('width'), '80');
     assert_equals(rect_dynamic.getAttribute('height'), '45');
   }, 'Can modify value with container-relative units');

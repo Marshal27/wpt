@@ -42,6 +42,8 @@
 
   promise_test(async () => {
     await waitForLoad(window);
+    if (waitForPolyfill) await waitForPolyfill();
+
     const vw_child = iframe.contentDocument.querySelector("#vw > span");
     const vh_child = iframe.contentDocument.querySelector("#vh > span");
 
@@ -49,10 +51,12 @@
     assert_equals(getComputedStyle(vh_child).color, "rgb(255, 0, 0)", "vh before resize");
 
     iframe.style.width = "200px";
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(vw_child).color, "rgb(0, 128, 0)", "vw after width resize");
     assert_equals(getComputedStyle(vh_child).color, "rgb(255, 0, 0)", "vh after width resize");
 
     iframe.style.height = "200px";
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(vw_child).color, "rgb(0, 128, 0)", "vw after height resize");
     assert_equals(getComputedStyle(vh_child).color, "rgb(0, 128, 0)", "vh after height resize");
   });

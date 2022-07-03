@@ -19,13 +19,15 @@
   setup(() => assert_implements_container_queries());
 
   function test_query(query, expected) {
-    test((t) => {
+    promise_test(async t => {
       let style = document.createElement('style');
       t.add_cleanup(() => { style.remove(); });
       style.innerText = `@container ${query} { #inner { --applied:true; } }`;
+      if (waitForPolyfill) await waitForPolyfill();
       let cs = getComputedStyle(inner);
       assert_equals(cs.getPropertyValue('--applied'), 'false');
       document.head.append(style);
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(cs.getPropertyValue('--applied'), expected.toString());
     }, query);
   };

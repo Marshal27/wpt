@@ -23,13 +23,16 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     target.focus();
     assert_not_equals(document.activeElement, target);
   }, "Initially display:none, not focusable");
 
-  test(() => {
+  promise_test(async () => {
     canvas.style.width = "200px";
+    if (waitForPolyfill) await waitForPolyfill();
+
     target.focus();
     assert_equals(document.activeElement, target);
   }, "Focusable after container size change");

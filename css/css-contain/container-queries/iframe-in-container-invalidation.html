@@ -44,6 +44,7 @@
 
   promise_test(async () => {
     await waitForLoad(window);
+    if (waitForPolyfill) await waitForPolyfill();
     let inner_div = iframe.contentDocument.querySelector('div#child');
     assert_equals(getComputedStyle(inner_div).color, 'rgb(255, 0, 0)');
 
@@ -53,6 +54,7 @@
     container.style.width = '400px';
     container.style.setProperty('--x', 'x'); // crbug.com/1312940
 
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(inner_div).color, 'rgb(0, 128, 0)');
   });
 </script>

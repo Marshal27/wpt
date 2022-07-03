@@ -15,7 +15,7 @@
 setup(() => assert_implements_container_queries());
 
 function test_evaluation(container_class, query, expected) {
-  test(function(t) {
+  promise_test(async t => {
     let style_node = document.createElement('style');
     t.add_cleanup(() => {
       container.classList.remove(container_class);
@@ -23,9 +23,11 @@ function test_evaluation(container_class, query, expected) {
     });
     style_node.innerText = `@container ${query} { #target { --applied:true; } }`;
 
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target).getPropertyValue('--applied'), '');
     container.classList.add(container_class);
     document.head.append(style_node);
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target).getPropertyValue('--applied'), expected ? 'true' : '');
   }, `${query} (.${container_class})`);
 }

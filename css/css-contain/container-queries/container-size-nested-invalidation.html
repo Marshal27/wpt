@@ -40,21 +40,25 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(function() {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(outer_child).getPropertyValue('--outer'), 'true');
     assert_equals(getComputedStyle(inner_child).getPropertyValue('--inner'), 'true');
 
     outer.style.width = '80px';
+    if (waitForPolyfill) await waitForPolyfill();
 
     assert_equals(getComputedStyle(outer_child).getPropertyValue('--outer'), '');
     assert_equals(getComputedStyle(inner_child).getPropertyValue('--inner'), 'true');
 
     outer.style.width = '60px';
+    if (waitForPolyfill) await waitForPolyfill();
 
     assert_equals(getComputedStyle(outer_child).getPropertyValue('--outer'), '');
     assert_equals(getComputedStyle(inner_child).getPropertyValue('--inner'), '');
 
     outer.style.width = '100px';
+    if (waitForPolyfill) await waitForPolyfill();
 
     assert_equals(getComputedStyle(outer_child).getPropertyValue('--outer'), 'true');
     assert_equals(getComputedStyle(inner_child).getPropertyValue('--inner'), 'true');

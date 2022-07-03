@@ -15,13 +15,15 @@
 <script>
   setup(() => assert_implements_container_queries());
 
-  test(function(t) {
+  promise_test(async t => {
     t.add_cleanup(() => { div.style = ''; });
 
+    if (waitForPolyfill) await waitForPolyfill();
     assert_greater_than(div.offsetWidth, 0);
     assert_greater_than(div.offsetHeight, 0);
 
     div.style.containerType = 'size';
+    if (waitForPolyfill) await waitForPolyfill();
 
     assert_equals(div.offsetWidth, 0);
     assert_equals(div.offsetHeight, 0);

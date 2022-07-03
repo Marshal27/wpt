@@ -26,11 +26,13 @@
 
   const green = "rgb(0, 128, 0)";
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(text).color, green);
   }, "SVG text querying SVG root size container");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(div).color, green);
   }, "div in foreignObject querying SVG root size container");
 </script>

@@ -56,21 +56,25 @@
   const container_width = parseInt(getComputedStyle(container).width);
   const inner_width = parseInt(getComputedStyle(inner).width);
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(item1_width, container_width);
     assert_equals(item1_width, inner_width);
   }, "#item1, #container, and #inner should all have the same width: " + item1_width);
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     let expected_background = container_width >= 125 ? "rgb(0, 128, 0)" : "rgba(0, 0, 0, 0)";
     assert_equals(getComputedStyle(inner).backgroundColor, expected_background);
   }, "The container query should match the layed out width");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(item1_width + item2_width, 200);
   }, "The sum of the item widths should match the flexbox width");
 
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(parseInt(getComputedStyle(item2, "::before").width), item2_width);
   }, "The size of the flex item #2 should be given by its contents");
 </script>

@@ -23,9 +23,10 @@
   }
 
   function test_query_invalid(query) {
-    test(t => {
+    promise_test(async t => {
       t.add_cleanup(cleanup_main);
       let style = set_style(`@container name ${query} {}`);
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(style.sheet.rules.length, 0);
     }, query);
   }
@@ -33,12 +34,13 @@
   // Tests that 1) the query parses, and 2) is either "unknown" or not, as
   // specified.
   function test_query_valid(query, unknown) {
-    test(t => {
+    promise_test(async t => {
       t.add_cleanup(cleanup_main);
       let style = set_style(`
         @container name ${query} {}
         @container name (${query} or (not ${query})) { main { --match:true; } }
       `);
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(style.sheet.rules.length, 2);
       const expected = unknown ? '' : 'true';
       assert_equals(getComputedStyle(main).getPropertyValue('--match'), expected);
@@ -54,17 +56,19 @@
   }
 
   function test_container_selector_invalid(container_selector) {
-    test(t => {
+    promise_test(async t => {
       t.add_cleanup(cleanup_main);
       let style = set_style(`@container ${container_selector} (width) {}`);
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(style.sheet.rules.length, 0);
     }, `Container selector: ${container_selector}`);
   }
 
   function test_container_selector_valid(container_selector) {
-    test(t => {
+    promise_test(async t => {
       t.add_cleanup(cleanup_main);
       let style = set_style(`@container ${container_selector} (width) {}`);
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(style.sheet.rules.length, 1);
     }, `Container selector: ${container_selector}`);
   }
