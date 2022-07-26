@@ -53,13 +53,13 @@
     if (waitForPolyfill) await waitForPolyfill();
     let li = document.querySelector('#container2 li');
     assert_equals(getComputedStyle(li, '::marker').color, 'rgb(0, 0, 0)');
-
-    if (waitForPolyfill) await waitForPolyfill();
+    
     container2.style.width = '300px';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(li, '::marker').color, 'rgb(0, 128, 0)');
 
-    if (waitForPolyfill) await waitForPolyfill();
     container2.style = '';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(li, '::marker').color, 'rgb(0, 0, 0)');
   }, 'Pseudo-element ::marker responds to container size changes');
 </script>

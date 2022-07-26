@@ -27,7 +27,11 @@
     assert_equals(getComputedStyle(child).color, "rgb(255, 0, 0)");
   }, "#dialog initially sized by #containing-block");
 
-  promise_test(async () => {
+  promise_test(async (t) => {
+    assert_implements_optional(typeof dialog.showModal === 'function');
+    t.add_cleanup(() => {
+      dialog.close();
+    });
     dialog.showModal();
     if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).color, "rgb(0, 128, 0)");

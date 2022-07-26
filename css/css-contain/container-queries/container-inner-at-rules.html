@@ -38,7 +38,8 @@
   #child { animation: anim1 10s paused, anim2 10s paused; }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--anim1'), 'true');
     assert_equals(getComputedStyle(child).getPropertyValue('--anim2'), 'true');
   }, '@keyframes is defined regardless of evaluation');
@@ -69,7 +70,9 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
+    assert_implements_optional(typeof window.CSSPropertyRule !== 'undefined');
     assert_equals(getComputedStyle(child).getPropertyValue('--prop1'), '20px');
     assert_equals(getComputedStyle(child).getPropertyValue('--prop2'), '40px');
   }, '@property is defined regardless of evaluation');
@@ -95,7 +98,9 @@
 
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    assert_implements_optional(typeof window.CSSLayerBlockRule !== 'undefined');
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--layer'), 'b');
   }, '@layer order respected regardless of evaluation');
 </script>
@@ -121,6 +126,8 @@
 </style>
 <script>
   promise_test(async (t) => {
+    if (waitForPolyfill) await waitForPolyfill();
+
     const fonts1 = await document.fonts.load("20px Font1");
     assert_not_equals(fonts1[0], undefined);
     assert_equals(fonts1[0].stretch, "50% 200%");
@@ -156,7 +163,8 @@
 
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--media1'), '');
     assert_equals(getComputedStyle(child).getPropertyValue('--media2'), 'true');
     assert_equals(getComputedStyle(child).getPropertyValue('--media3'), '');
@@ -187,7 +195,8 @@
 
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--supports1'), '');
     assert_equals(getComputedStyle(child).getPropertyValue('--supports2'), 'true');
     assert_equals(getComputedStyle(child).getPropertyValue('--supports3'), '');

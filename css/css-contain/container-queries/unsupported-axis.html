@@ -142,7 +142,8 @@
   }
 </style>
 <script>
-  test(function(t) {
+  promise_test(async (t) => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target).getPropertyValue('--inline-size'), 'true');
   }, '(inline-size > 0px)');
 </script>
@@ -154,9 +155,10 @@
   }
 </style>
 <script>
-  test(function(t) {
+  promise_test(async (t) => {
     // container-type:inline-size does not support queries along the block
     // axis.
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target).getPropertyValue('--block-size'), '');
   }, '(block-size > 0px)');
 </script>
@@ -168,10 +170,11 @@
   }
 </style>
 <script>
-  test(function(t) {
+  promise_test(async (t) => {
     // Changing the writing-mode does not affect the evaluation of block-size.
     t.add_cleanup(() => { target.style = ''; });
     target.style.writingMode = 'vertical-rl';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(target).getPropertyValue('--block-size2'), '');
   }, '(block-size > 0px), with writing-mode:vertical-rl');
 </script>

@@ -11,3 +11,5 @@ function polyfill_declarative_shadow_dom(root) {
     polyfill_declarative_shadow_dom(shadowRoot);
   });
 }
+
+window.waitForPolyfill = window.waitForPolyfill || null;

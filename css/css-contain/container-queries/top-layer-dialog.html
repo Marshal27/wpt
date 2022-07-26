@@ -29,19 +29,28 @@
     assert_equals(getComputedStyle(dialog).color, "rgb(255, 0, 0)");
   }, "#container initially wider than 200px");
 
-  promise_test(async () => {
+  promise_test(async (t) => {
     container.style.width = "200px";
     if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(dialog).color, "rgb(0, 128, 0)");
   }, "#container changed to 200px");
 
-  promise_test(async () => {
+  promise_test(async (t) => {
+    assert_implements_optional(typeof dialog.showModal === 'function');
+    t.add_cleanup(() => {
+      dialog.close();
+    });
     dialog.showModal();
     if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(dialog).color, "rgb(0, 128, 0)");
   }, "Modal dialog still has parent as query container while in top layer");
 
-  promise_test(async () => {
+  promise_test(async (t) => {
+    assert_implements_optional(typeof dialog.showModal === 'function');
+    t.add_cleanup(() => {
+      dialog.close();
+    });
+    dialog.showModal();
     container.style.width = "100px";
     if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(dialog).color, "rgb(0, 255, 0)");

@@ -29,7 +29,12 @@
     assert_equals(getComputedStyle(inner).color, "rgb(255, 0, 0)");
   }, "Dialogs initially not matching for container queries");
 
-  promise_test(async () => {
+  promise_test(async (t) => {
+    assert_implements_optional(typeof outer.showModal === 'function');
+    t.add_cleanup(() => {
+      outer.close();
+      inner.close();
+    });
     container.offsetTop;
     outer.showModal();
     inner.showModal();
@@ -38,7 +43,14 @@
     assert_equals(getComputedStyle(inner).color, "rgb(255, 0, 0)");
   }, "Dialogs still not matching after showModal");
 
-  promise_test(async () => {
+  promise_test(async (t) => {
+    assert_implements_optional(typeof outer.showModal === 'function');
+    t.add_cleanup(() => {
+      outer.close();
+      inner.close();
+    });
+    outer.showModal();
+    inner.showModal();
     container.offsetTop;
     container.style.width = "200px";
     if (waitForPolyfill) await waitForPolyfill();

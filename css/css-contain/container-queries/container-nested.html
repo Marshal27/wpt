@@ -42,7 +42,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--implicit'), 'true');
   }, 'Implicit');
 </script>
@@ -56,7 +57,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--implicit-outer-fail'), '');
   }, 'Implicit, outer failing');
 </script>
@@ -70,7 +72,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--implicit-inner-fail'), '');
   }, 'Implicit, inner failing');
 </script>
@@ -84,7 +87,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--named-outer-inner'), 'true');
   }, 'Outer named, inner named');
 </script>
@@ -98,7 +102,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--named-outer-inner-reverse'), 'true');
   }, 'Outer named, inner named (reverse)');
 </script>
@@ -112,7 +117,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--named-failing-outer'), '');
   }, 'Failing outer name');
 </script>
@@ -125,7 +131,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--named-failing-inner'), '');
   }, 'Failing inner name');
 </script>
@@ -139,7 +146,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--named-outer-inner-implicit'), 'true');
   }, 'Outer named, inner implicit');
 </script>
@@ -153,7 +161,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--implicit-outer-inner-named'), 'true');
   }, 'Inner named, outer implicit');
 </script>
@@ -167,7 +176,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--implicit-outer-inner-named-reverse'), 'true');
   }, 'Inner named, outer implicit (reverse)');
 </script>
@@ -183,7 +193,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--three-levels'), 'true');
   }, 'Three levels');
 </script>
@@ -199,7 +210,8 @@
   }
 </style>
 <script>
-  test(() => {
+  promise_test(async () => {
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--three-levels-middle-fail'), '');
   }, 'Three levels, middle fail');
 </script>
@@ -213,10 +225,12 @@
   }
 </style>
 <script>
-  test((t) => {
+  promise_test(async (t) => {
     t.add_cleanup(() => { outer.style = ''; });
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--inner-named-invalidation'), 'true');
     outer.style.height = '200px';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--inner-named-invalidation'), '');
   }, 'Named inner invalidation');
 </script>
@@ -230,10 +244,12 @@
   }
 </style>
 <script>
-  test((t) => {
+  promise_test(async (t) => {
     t.add_cleanup(() => { inner.style = ''; });
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--outer-implicit-invalidation'), 'true');
     inner.style.width = '200px';
+    if (waitForPolyfill) await waitForPolyfill();
     assert_equals(getComputedStyle(child).getPropertyValue('--outer-implicit-invalidation'), '');
   }, 'Implicit outer invalidation');
 </script>

@@ -45,6 +45,7 @@
 
     promise_test(async () => {
       outer.style.width = "300px";
+      if (waitForPolyfill) await waitForPolyfill();
       assert_equals(getComputedStyle(target, pseudo_element).color, green);
     }, `Color for ${pseudo_element} depending on container`);
   });
