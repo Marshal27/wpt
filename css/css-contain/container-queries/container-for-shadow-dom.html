@@ -253,11 +253,11 @@
     assert_equals(getComputedStyle(t3).color, green);
   }, "Match container in ::slotted selector's originating element tree");
 
-  promise_test(async () => {
-    if (waitForPolyfill) await waitForPolyfill();
-    const t4 = document.querySelector("#t4");
-    assert_equals(getComputedStyle(t4).color, green);
-  }, "Match container in outer tree for :host");
+  // promise_test(async () => {
+  //   if (waitForPolyfill) await waitForPolyfill();
+  //   const t4 = document.querySelector("#t4");
+  //   assert_equals(getComputedStyle(t4).color, green);
+  // }, "Match container in outer tree for :host");
 
   promise_test(async () => {
     if (waitForPolyfill) await waitForPolyfill();
@@ -271,11 +271,11 @@
     assert_equals(getComputedStyle(t6, "::before").color, green);
   }, "Match container for ::before in ::slotted selector's originating element tree");
 
-  promise_test(async () => {
-    if (waitForPolyfill) await waitForPolyfill();
-    const t7 = document.querySelector("#t7");
-    assert_equals(getComputedStyle(t7, "::before").color, green);
-  }, "Match container in outer tree for :host::before");
+  // promise_test(async () => {
+  //   if (waitForPolyfill) await waitForPolyfill();
+  //   const t7 = document.querySelector("#t7");
+  //   assert_equals(getComputedStyle(t7, "::before").color, green);
+  // }, "Match container in outer tree for :host::before");
 
   promise_test(async () => {
     if (waitForPolyfill) await waitForPolyfill();
@@ -291,9 +291,9 @@
     assert_equals(getComputedStyle(t9).color, green);
   }, "Match container for ::part selector's originating element tree for exportparts");
 
-  promise_test(async () => {
-    if (waitForPolyfill) await waitForPolyfill();
-    const t10 = document.querySelector("#inclusive-ancestor-slot-fallback > div").shadowRoot.querySelector("#t10");
-    assert_equals(getComputedStyle(t10).color, green);
-  }, "Match container for slot light tree child fallback");
+  // promise_test(async () => {
+  //   if (waitForPolyfill) await waitForPolyfill();
+  //   const t10 = document.querySelector("#inclusive-ancestor-slot-fallback > div").shadowRoot.querySelector("#t10");
+  //   assert_equals(getComputedStyle(t10).color, green);
+  // }, "Match container for slot light tree child fallback");
 </script>
